@@ -24,7 +24,7 @@ addLight(0xffffff, 1, { x: -3, y: 10, z: -10 }).castShadow = true;
 addLight(0xffffff, 1, { x: 0, y: 20, z: 0 });
 
 new GLTFLoader().load(
-  "https://raw.githack.com/5Bianca/Blender/main/ground5.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/src/glb-models/ground5.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.4);
     model.position.set(10, -0.5, 0);
@@ -35,7 +35,7 @@ new GLTFLoader().load(
 );
 
 new GLTFLoader().load(
-  "https://raw.githack.com/5Bianca/Blender/main/cinema.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/cinema.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.08);
     model.position.set(75, -0.5, 0);
@@ -47,7 +47,7 @@ new GLTFLoader().load(
 );
 
 new GLTFLoader().load(
-  "https://raw.githack.com/5Bianca/Blender/main/HelpBuilding1.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/HelpBuilding1.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.4);
     model.position.set(-50, -0.5, 0);
@@ -74,13 +74,12 @@ const loadBuilding = (url, position, rotation) => {
   [new THREE.Vector3(10, 0, 30), 180],
   [new THREE.Vector3(40, 0, 30), 180]
 ].forEach(([position, rotation]) =>
-  loadBuilding(
-    "https://raw.githack.com/5Bianca/Blender/main/Building1.glb",
+  loadBuilding( "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/Building1.glb",
     position,
     rotation
   )
 );
-new GLTFLoader().load("https://raw.githack.com/5Bianca/Blender/main/person.glb",
+new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/person.glb",
   ({ scene: model }, animations) => {
     scene.add(model);
 
