@@ -24,7 +24,7 @@ addLight(0xffffff, 1, { x: -3, y: 10, z: -10 }).castShadow = true;
 addLight(0xffffff, 1, { x: 0, y: 20, z: 0 });
 
 new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/src/glb-models/ground5.glb",
+  "https://raw.githack.com/5Bianca/Blender/main/ground5.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.4);
     model.position.set(10, -0.5, 0);
@@ -35,7 +35,7 @@ new GLTFLoader().load(
 );
 
 new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/cinema.glb",
+  "https://raw.githack.com/5Bianca/Blender/main/cinema.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.08);
     model.position.set(75, -0.5, 0);
@@ -47,7 +47,7 @@ new GLTFLoader().load(
 );
 
 new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/HelpBuilding1.glb",
+  "https://raw.githack.com/5Bianca/Blender/main/HelpBuilding1.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.4);
     model.position.set(-50, -0.5, 0);
@@ -74,12 +74,13 @@ const loadBuilding = (url, position, rotation) => {
   [new THREE.Vector3(10, 0, 30), 180],
   [new THREE.Vector3(40, 0, 30), 180]
 ].forEach(([position, rotation]) =>
-  loadBuilding( "https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/Building1.glb",
+  loadBuilding(
+    "https://raw.githack.com/5Bianca/Blender/main/Building1.glb",
     position,
     rotation
   )
 );
-new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13b248fcf0d30cd331162d07013f/person.glb",
+new GLTFLoader().load("https://raw.githack.com/5Bianca/Blender/main/person.glb",
   ({ scene: model }, animations) => {
     scene.add(model);
 
@@ -87,16 +88,19 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/d4398d0718fa13
     model.position.x = 12;
     model.position.y = 0;
     model.position.z = 0;
-
+   
+    camera.position.set(0, 10, 10);
     camera.lookAt(model.position);
-
-    controls.target.copy(model.position);
     controls.target.copy(model.position);
 
     mesh = model;
+  
+    controls.addEventListener("change", () => {
+      camera.lookAt(mesh.position);
+      controls.target.copy(mesh.position);
+    });
   }
 );
-
 
 document.addEventListener('keydown', (event) => {
   const speed = 0.5;
@@ -106,13 +110,12 @@ document.addEventListener('keydown', (event) => {
     case 'ArrowLeft': mesh.position.x -= speed; break;
     case 'ArrowRight':mesh.position.x += speed;break;
   }
-  camera.position.set(mesh.position.x, mesh.position.y + 5, mesh.position.z + 10);
+  camera.position.set(mesh.position.x, mesh.position.y + 8, mesh.position.z + 8);
   camera.lookAt(mesh.position);
 });
 
 function animate() {
     requestAnimationFrame(animate);
-
     renderer.render(scene, camera);
 }
 
