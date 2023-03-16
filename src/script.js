@@ -2,18 +2,27 @@ import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js";
 
-const renderer = new THREE.WebGLRenderer();
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight);
-const controls = new OrbitControls(camera, renderer.domElement);
-let mesh;
+const joinButton = document.getElementById("join-button");
+const welcomePage = document.querySelector(".overlay");
+const scenePage = document.querySelector(".scene-container");
+const sceneCanvas = document.getElementById("scene-canvas");
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-scene.background = new THREE.Color(0xea5e5ff);
-scene.add(new THREE.HemisphereLight(0xffffff, 0x333399, 1.0));
-camera.position.set(10, 8, 10);
+joinButton.addEventListener("click", () => {
+  welcomePage.style.display = "none";
+  scenePage.style.display = "block";
 
-const addLight = (color, intensity, position) => {
+  const renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas });
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  let mesh;
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  scene.background = new THREE.Color(0xea5e5ff);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x333399, 1.0));
+  camera.position.set(10, 8, 10);
+  
+  const addLight = (color, intensity, position) => {
   const light = new THREE.DirectionalLight(color, intensity);
   light.position.set(position.x, position.y, position.z);
   scene.add(light);
@@ -23,16 +32,16 @@ const addLight = (color, intensity, position) => {
 addLight(0xffffff, 1, { x: -3, y: 10, z: -10 }).castShadow = true;
 addLight(0xffffff, 1, { x: 0, y: 20, z: 0 });
 
-new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/ground5.glb",
-  ({ scene: model }, animations) => {
-    model.scale.setScalar(0.4);
-    model.position.set(10, -0.5, 0);
-    camera.lookAt(model.position);
-    controls.target.copy(model.position);
-    scene.add(model);
-  }
-);
+  new GLTFLoader().load(
+    "https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/ground5.glb",
+    ({ scene: model }, animations) => {
+      model.scale.setScalar(0.4);
+      model.position.set(10, -0.5, 0);
+      camera.lookAt(model.position);
+      controls.target.copy(model.position);
+      scene.add(model);
+    }
+  );
 
 new GLTFLoader().load(
   "https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/cinema.glb",
@@ -80,44 +89,43 @@ const loadBuilding = (url, position, rotation) => {
     rotation
   )
 );
-new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/person.glb",
-  ({ scene: model }, animations) => {
+  new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/person.glb", ({ scene: model }, animations) => {
     scene.add(model);
-
     model.scale.setScalar(1.1);
-    model.position.x = 12;
-    model.position.y = 0;
-    model.position.z = 0;
-   
+    model.position.set(12, 0, 0);
     camera.position.set(0, 10, 10);
     camera.lookAt(model.position);
     controls.target.copy(model.position);
-
     mesh = model;
-  
-    controls.addEventListener("change", () => {
-      camera.lookAt(mesh.position);
-      controls.target.copy(mesh.position);
-    });
-  }
-);
+    scene.add(mesh);
+  });
 
-document.addEventListener('keydown', (event) => {
-  const speed = 0.5;
-  switch (event.key) {
-    case 'ArrowUp': mesh.position.z -= speed; break;
-    case 'ArrowDown': mesh.position.z += speed; break;
-    case 'ArrowLeft': mesh.position.x -= speed; break;
-    case 'ArrowRight':mesh.position.x += speed;break;
-  }
-  camera.position.set(mesh.position.x, mesh.position.y + 8, mesh.position.z + 8);
-  camera.lookAt(mesh.position);
-});
-
-function animate() {
+  function animate() {
     requestAnimationFrame(animate);
+    if (mesh) mesh.rotation.y = controls.getAzimuthalAngle();
     renderer.render(scene, camera);
-}
+  }
 
-animate();
-document.body.appendChild(renderer.domElement);
+  controls.addEventListener("change", () => {
+    camera.lookAt(mesh.position);
+    controls.target.copy(mesh.position);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    const speed = 0.5;
+    switch (event.key) {
+      case 'ArrowUp': mesh.position.z -= speed; break;
+      case 'ArrowDown': mesh.position.z += speed; break;
+      case 'ArrowLeft': mesh.position.x -= speed; break;
+      case 'ArrowRight':mesh.position.x += speed;break;
+      case "Escape":
+        scenePage.style.display = "none";
+        welcomePage.style.display = "block";
+        break;
+    }
+    camera.position.set(mesh.position.x, mesh.position.y + 8, mesh.position.z + 8);
+    camera.lookAt(mesh.position);
+  });
+
+  animate();
+});
