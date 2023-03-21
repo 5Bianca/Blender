@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+
+body {
+  font-family: Nunito;
+  background: #A5E5FF;
+  color: black;
+  text-align: center;
+}
+
+label {
+  font-family: Libre Baskerville;
+}
