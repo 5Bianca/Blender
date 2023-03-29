@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+  head
+    title Welcome to FeBe
+    link(rel="stylesheet", href="style.css")
+    script(src="script.js")
+  body
+  #background
+    .overlay
+      .container
+        h1 FeBe
+        button#join-button Join
+        p use the arrows or WASD keys to move
+        p press esc to leave
+        img(src="https://rawcdn.githack.com/5Bianca/Blender/bcd56f95d3c9b8dbe82640b8977c790dc2eef06c/person.png", alt="Person")
+    .renderer-container(style="display: none;")
+      canvas#canvas
+    .scene-container(style="display: none;")
+      canvas#scene-canvas
+      
+      
+.modal-container
+  label.has-text-centered(for='button_1') open video 
+  input#button_1.modal-toggle(type='checkbox' notchecked='notchecked')
+  .modal-backdrop
+    .modal-content.blur
+      label.modal-close(for='button_1') x
+      iframe(width='700', height='550', src='https://meet.jit.si/FebeMetaverse', frameborder='0', allowfullscreen)
