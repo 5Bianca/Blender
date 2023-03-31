@@ -2,6 +2,8 @@ import * as THREE from "https://cdn.skypack.dev/three@0.136.0";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js";
 
+
+
 const joinButton = document.getElementById("join-button");
 const welcomePage = document.querySelector(".overlay");
 const scenePage = document.querySelector(".scene-container");
@@ -15,6 +17,13 @@ joinButton.addEventListener("click", () => {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight);
   const controls = new OrbitControls(camera, renderer.domElement);
+  
+controls.enableRotate = true;
+controls.enablePan = false;
+controls.enableZoom = true;
+controls.maxPolarAngle = Math.PI / 2;
+controls.minPolarAngle = Math.PI / 2;
+
   let mesh;
 
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -36,7 +45,6 @@ addLight(0xffffff, 1, { x: 0, y: 20, z: 0 });
     ({ scene: model }, animations) => {
       model.scale.setScalar(0.4);
       model.position.set(10, -0.5, 0);
-      camera.lookAt(model.position);
       controls.target.copy(model.position);
       scene.add(model);
     }
@@ -49,7 +57,6 @@ new GLTFLoader().load(
     model.position.set(75, -0.5, 0);
     model.rotateY(Math.PI / 2);
     const cameraTarget = new THREE.Vector3(model.position.x, model.position.y + 2, model.position.z);
-    camera.lookAt(model.position);
     controls.target.copy(model.position);
     scene.add(model);
   }
@@ -60,7 +67,6 @@ new GLTFLoader().load(
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.4);
     model.position.set(-50, -0.5, 0);
-    camera.lookAt(model.position);
     controls.target.copy(model.position);
     scene.add(model);
   }
@@ -110,7 +116,7 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
     scene.add(model);
     model.scale.setScalar(1.1);
     model.position.set(12, 0, 0);
-    camera.position.set(12, 2, 6);
+    camera.position.set(12, 2, 5);
     camera.lookAt(model.position);
     controls.target.copy(model.position);
     mesh = model;
@@ -124,11 +130,12 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
   }
 
  controls.addEventListener("change", () => {
-    const cameraTarget = new THREE.Vector3(mesh.position.x, mesh.position.y + 2.75, mesh.position.z);
-    camera.lookAt(cameraTarget);
+    const cameraTarget = new THREE.Vector3(mesh.position.x, mesh.position.y + 2, mesh.position.z);
     controls.target.copy(cameraTarget);
-    
+   
   });
+  
+  
  document.addEventListener('keydown', (event) => {
   const speed = 0.8;
   const angle = mesh.rotation.y - Math.PI; // subtract 180 degrees (PI radians) to face the back of the object
@@ -153,8 +160,7 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
       break;
   }
    
-  const cameraDistance = 6;
-  const cameraHeight = 2;
+  const cameraDistance = 5;
   const cameraPosition = new THREE.Vector3(
     mesh.position.x - cameraDistance * Math.sin(angle),
     2,
@@ -162,7 +168,7 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
   );
   const cameraTarget = new THREE.Vector3(
     mesh.position.x + 2 * Math.sin(angle),
-    3,
+    2,
     mesh.position.z + 2 * Math.cos(angle)
   );
   camera.position.copy(cameraPosition);
