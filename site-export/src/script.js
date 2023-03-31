@@ -20,7 +20,7 @@ joinButton.addEventListener("click", () => {
   
 controls.enableRotate = true;
 controls.enablePan = false;
-controls.enableZoom = true;
+controls.enableZoom = false;
 controls.maxPolarAngle = Math.PI / 2;
 controls.minPolarAngle = Math.PI / 2;
 
