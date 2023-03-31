@@ -116,7 +116,7 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
     scene.add(model);
     model.scale.setScalar(1.1);
     model.position.set(12, 0, 0);
-    camera.position.set(12, 2, 5);
+    camera.position.set(12, 3, 6);
     camera.lookAt(model.position);
     controls.target.copy(model.position);
     mesh = model;
@@ -130,7 +130,7 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
   }
 
  controls.addEventListener("change", () => {
-    const cameraTarget = new THREE.Vector3(mesh.position.x, mesh.position.y + 2, mesh.position.z);
+    const cameraTarget = new THREE.Vector3(mesh.position.x, mesh.position.y + 3, mesh.position.z);
     controls.target.copy(cameraTarget);
    
   });
@@ -163,12 +163,12 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
   const cameraDistance = 5;
   const cameraPosition = new THREE.Vector3(
     mesh.position.x - cameraDistance * Math.sin(angle),
-    2,
+    3,
     mesh.position.z - cameraDistance * Math.cos(angle)
   );
   const cameraTarget = new THREE.Vector3(
     mesh.position.x + 2 * Math.sin(angle),
-    2,
+    3,
     mesh.position.z + 2 * Math.cos(angle)
   );
   camera.position.copy(cameraPosition);
