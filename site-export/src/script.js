@@ -17,12 +17,7 @@ joinButton.addEventListener("click", () => {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight);
   const controls = new OrbitControls(camera, renderer.domElement);
-  
-controls.enableRotate = true;
-controls.enablePan = false;
-controls.enableZoom = false;
-controls.maxPolarAngle = Math.PI / 2;
-controls.minPolarAngle = Math.PI / 2;
+ 
 
   let mesh;
 
@@ -41,21 +36,31 @@ addLight(0xffffff, 1, { x: -3, y: 10, z: -10 }).castShadow = true;
 addLight(0xffffff, 1, { x: 0, y: 20, z: 0 });
 
   new GLTFLoader().load(
-    "https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/ground5.glb",
+    "https://rawcdn.githack.com/5Bianca/Blender/181f78714c5c09d096965967f22559cb7d240856/groundF2.glb",
     ({ scene: model }, animations) => {
-      model.scale.setScalar(0.4);
-      model.position.set(10, -0.5, 0);
+      model.scale.setScalar(1.1);
+      model.position.set(10, -2.5, 0);
       controls.target.copy(model.position);
       scene.add(model);
     }
   );
+  new GLTFLoader().load(
+    "https://rawcdn.githack.com/5Bianca/Blender/181f78714c5c09d096965967f22559cb7d240856/terrasse.glb",
+    ({ scene: model }, animations) => {
+      model.scale.setScalar(1.1);
+      model.position.set(10, -2.5, 0);
+      controls.target.copy(model.position);
+      scene.add(model);
+    }
+  );
+  
 
 new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/cinema.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/62b5494715a5da5aa8f125a91f0a3e0659ca3b58/Conferernce%20Hall.glb",
   ({ scene: model }, animations) => {
-    model.scale.setScalar(0.08);
-    model.position.set(75, -0.5, 0);
-    model.rotateY(Math.PI / 2);
+    model.scale.setScalar(0.135);
+    model.position.set(67, -0.5, 25);
+    model.rotateY(Math.PI / 2.3);
     const cameraTarget = new THREE.Vector3(model.position.x, model.position.y + 2, model.position.z);
     controls.target.copy(model.position);
     scene.add(model);
@@ -63,10 +68,32 @@ new GLTFLoader().load(
 );
 
 new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/HelpBuilding1.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/b3ecd7089ca803ae5ba4c654002a3aeaa21da05c/Help%20center.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(0.4);
-    model.position.set(-50, -0.5, 0);
+    model.position.set(-29, 0, -20);
+    model.rotateY(Math.PI / 2.5);
+    controls.target.copy(model.position);
+    scene.add(model);
+  }
+);
+ new GLTFLoader().load(
+  "https://rawcdn.githack.com/5Bianca/Blender/d33e2866954a1a5a23d348c1613bbd84feb98131/Math%20Building%20good.glb",
+  ({ scene: model }, animations) => {
+    model.scale.setScalar(1.1);
+    model.position.set(38, 0, -78);
+    model.rotation.y = Math.PI;
+    controls.target.copy(model.position);
+    scene.add(model);
+  }
+);
+
+   new GLTFLoader().load(
+  "https://rawcdn.githack.com/5Bianca/Blender/d33e2866954a1a5a23d348c1613bbd84feb98131/Tech%20building.glb",
+  ({ scene: model }, animations) => {
+    model.scale.setScalar(1.1);
+    model.position.set(60, -37, -35);
+    model.rotateY(Math.PI / 2.3);
     controls.target.copy(model.position);
     scene.add(model);
   }
@@ -82,12 +109,9 @@ const loadBuilding = (url, position, rotation) => {
 };
 
 [
-  [new THREE.Vector3(40, 0, -30), 180],
-  [new THREE.Vector3(10, 0, -30), 180],
-  [new THREE.Vector3(-20, 0, -30), 180],
-  [new THREE.Vector3(-20, 0, 30), 0],
-  [new THREE.Vector3(10, 0, 30), 0],
-  [new THREE.Vector3(40, 0, 30), 0]
+  [new THREE.Vector3(70, 0, -40), 205],
+  [new THREE.Vector3(-46, 0, -38), -41],
+  [new THREE.Vector3(-27, 0, 50), 220],
 ].forEach(([position, rotation]) =>
   loadBuilding(
     "https://rawcdn.githack.com/5Bianca/Blender/220629b627f8485b943586b3b51ee49c4bc747cf/bottombuildingspecialty4.glb",
@@ -97,12 +121,9 @@ const loadBuilding = (url, position, rotation) => {
 );
 
 [
-  [new THREE.Vector3(40, 0, -30), 180],
-  [new THREE.Vector3(10, 0, -30), 180],
-  [new THREE.Vector3(-20, 0, -30), 180],
-  [new THREE.Vector3(-20, 0, 30), 0],
-  [new THREE.Vector3(10, 0, 30), 0],
-  [new THREE.Vector3(40, 0, 30), 0]
+  [new THREE.Vector3(70, 0, -40), 205],
+  [new THREE.Vector3(-46, 0, -38), -41],
+  [new THREE.Vector3(-27, 0, 50), 220],
 ].forEach(([position, rotation]) =>
   loadBuilding(
     "https://rawcdn.githack.com/5Bianca/Blender/220629b627f8485b943586b3b51ee49c4bc747cf/topbuildingspecialty2.glb",
@@ -115,7 +136,7 @@ const loadBuilding = (url, position, rotation) => {
 new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30af159e8958c4317aba1a0c6e23c/person.glb", ({ scene: model }, animations) => {
     scene.add(model);
     model.scale.setScalar(1.1);
-    model.position.set(12, 0, 0);
+    model.position.set(23, 0, 7);
     camera.position.set(12, 3, 6);
     camera.lookAt(model.position);
     controls.target.copy(model.position);
