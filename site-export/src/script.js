@@ -3,11 +3,11 @@ import { GLTFLoader } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/l
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js";
 
 
-
 const joinButton = document.getElementById("join-button");
 const welcomePage = document.querySelector(".overlay");
 const scenePage = document.querySelector(".scene-container");
 const sceneCanvas = document.getElementById("scene-canvas");
+
 
 joinButton.addEventListener("click", () => {
   welcomePage.style.display = "none";
@@ -17,7 +17,12 @@ joinButton.addEventListener("click", () => {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight);
   const controls = new OrbitControls(camera, renderer.domElement);
- 
+  controls.enableRotate = true;
+  controls.enablePan = false;
+  controls.enableZoom = false;
+  controls.maxPolarAngle = Math.PI / 2;
+  controls.minPolarAngle = Math.PI / 2;
+
 
   let mesh;
 
