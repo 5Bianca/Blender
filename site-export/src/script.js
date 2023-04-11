@@ -83,7 +83,7 @@ new GLTFLoader().load(
   }
 );
  new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/d33e2866954a1a5a23d348c1613bbd84feb98131/Math%20Building%20good.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/c19e1824ecbb7f788b70607b3d175d2d9bc7974d/techBuilding2.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(1.1);
     model.position.set(38, 0, -78);
