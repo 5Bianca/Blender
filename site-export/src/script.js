@@ -93,16 +93,6 @@ new GLTFLoader().load(
   }
 );
 
-   new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/d33e2866954a1a5a23d348c1613bbd84feb98131/Tech%20building.glb",
-  ({ scene: model }, animations) => {
-    model.scale.setScalar(1.1);
-    model.position.set(60, -37, -35);
-    model.rotateY(Math.PI / 2.3);
-    controls.target.copy(model.position);
-    scene.add(model);
-  }
-);
 
 const loadBuilding = (url, position, rotation) => {
   new GLTFLoader().load(url, ({ scene: model }, animations) => {
@@ -113,6 +103,16 @@ const loadBuilding = (url, position, rotation) => {
   });
 };
 
+   new GLTFLoader().load(
+  "https://rawcdn.githack.com/5Bianca/Blender/a6cafafd67f173ee7eaf28a5176e4786f8c893b8/Tech%20building%20final.glb",
+  ({ scene: model }, animations) => {
+    model.scale.setScalar(1.1);
+    model.position.set(60, -36, -35);
+    model.rotateY(Math.PI / 2.3);
+    controls.target.copy(model.position);
+    scene.add(model);
+  }
+);
 [
   [new THREE.Vector3(70, 0, -40), 205],
   [new THREE.Vector3(-46, 0, -38), -41],
@@ -142,7 +142,7 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
     scene.add(model);
     model.scale.setScalar(1.1);
     model.position.set(23, 0, 7);
-    camera.position.set(12, 3, 6);
+    camera.position.set(23, 3, 13);
     camera.lookAt(model.position);
     controls.target.copy(model.position);
     mesh = model;
@@ -164,8 +164,8 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
   
  document.addEventListener('keydown', (event) => {
   const speed = 0.8;
-  const angle = mesh.rotation.y - Math.PI; // subtract 180 degrees (PI radians) to face the back of the object
-  const x = speed * Math.sin(angle); // calculate the x and z components of the movement vector
+  const angle = mesh.rotation.y - Math.PI; 
+  const x = speed * Math.sin(angle);
   const z = speed * Math.cos(angle);
   switch (event.key) {
     case 'ArrowUp': 
@@ -200,6 +200,8 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
   camera.position.copy(cameraPosition);
   camera.lookAt(cameraTarget);
 });
+  
+  
 
   animate();
 });
