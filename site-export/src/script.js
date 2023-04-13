@@ -25,6 +25,7 @@ joinButton.addEventListener("click", () => {
 
 
   let mesh;
+  let mathNorth1, mathWest2, mathSouth3, mathEast4;
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   scene.background = new THREE.Color(0xea5e5ff);
@@ -149,11 +150,54 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
     scene.add(mesh);
   });
 
-  function animate() {
-    requestAnimationFrame(animate);
-    if (mesh) mesh.rotation.y = controls.getAzimuthalAngle();
-    renderer.render(scene, camera);
+  
+const wallGeometryMath = new THREE.BoxGeometry(19, 22, 0.01);
+const wallGeometryMathDoor = new THREE.BoxGeometry(16, 22, 0.01);
+
+const wallMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.001 });
+  
+mathWest2 = new THREE.Mesh(wallGeometryMath, wallMaterial);
+mathWest2.position.set(38.5, 5, -66);
+scene.add(mathWest2);
+  
+mathEast4 = new THREE.Mesh(wallGeometryMath, wallMaterial);
+mathEast4.position.set(38.5, 5, -89);
+scene.add(mathEast4);
+  
+mathSouth3 = new THREE.Mesh(wallGeometryMath, wallMaterial);
+mathSouth3.position.set(48, 5, -77);
+mathSouth3.rotation.y = Math.PI/2; 
+scene.add(mathSouth3);
+  
+mathNorth1 = new THREE.Mesh(wallGeometryMathDoor, wallMaterial);
+mathNorth1.position.set(29, 5, -75);
+mathNorth1.rotation.y = Math.PI/2; 
+scene.add(mathNorth1);
+  
+  
+  
+
+function checkCollisions() {
+  if (!mesh) return; 
+  const wallBox1 = new THREE.Box3().setFromObject(mathNorth1);
+  const wallBox2 = new THREE.Box3().setFromObject(mathWest2);
+  const wallBox3 = new THREE.Box3().setFromObject(mathSouth3);
+  const wallBox4 = new THREE.Box3().setFromObject(mathEast4);
+  const objectBox = new THREE.Box3().setFromObject(mesh);
+  if (objectBox.intersectsBox(wallBox1)|| objectBox.intersectsBox(wallBox2)|| objectBox.intersectsBox(wallBox3)|| objectBox.intersectsBox(wallBox4)) {
+    mesh.position.copy(mesh.userData.previousPosition);
+  } else {
+    mesh.userData.previousPosition = mesh.position.clone();
   }
+}
+ function animate() {
+  requestAnimationFrame(animate);
+  if (mesh) {
+    mesh.rotation.y = controls.getAzimuthalAngle();
+    checkCollisions(); 
+  }
+  renderer.render(scene, camera);
+}
 
  controls.addEventListener("change", () => {
     const cameraTarget = new THREE.Vector3(mesh.position.x, mesh.position.y + 3, mesh.position.z);
@@ -185,6 +229,11 @@ new GLTFLoader().load("https://rawcdn.githack.com/5Bianca/Blender/e6cfceeb25e30a
       welcomePage.style.display = "block";
       break;
   }
+   function logPosition() {
+  console.log(`Position: (${mesh.position.x}, ${mesh.position.y}, ${mesh.position.z})`);
+}
+   document.addEventListener('keydown', logPosition);
+
    
   const cameraDistance = 5;
   const cameraPosition = new THREE.Vector3(
