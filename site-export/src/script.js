@@ -97,7 +97,7 @@ new GLTFLoader().load(
 
 const loadBuilding = (url, position, rotation) => {
   new GLTFLoader().load(url, ({ scene: model }, animations) => {
-    model.scale.setScalar(0.5);
+    model.scale.setScalar(0.7);
     model.position.copy(position);
     model.rotation.y = THREE.MathUtils.degToRad(rotation);
     scene.add(model);
@@ -120,6 +120,7 @@ const loadBuilding = (url, position, rotation) => {
   [new THREE.Vector3(-27, 0, 50), 220],
 ].forEach(([position, rotation]) =>
   loadBuilding(
+
     "https://rawcdn.githack.com/5Bianca/Blender/220629b627f8485b943586b3b51ee49c4bc747cf/bottombuildingspecialty4.glb",
     position,
     rotation
