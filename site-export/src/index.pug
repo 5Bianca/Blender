@@ -6,23 +6,27 @@ html(lang="en")
     script(src="script.js")
   body
   #background
-    .overlay
-      .container
-        h1 FeBe
-        button#join-button Join
-        p use the arrows or WASD keys to move
-        p press esc to leave
-        img(src="https://rawcdn.githack.com/5Bianca/Blender/bcd56f95d3c9b8dbe82640b8977c790dc2eef06c/person.png", alt="Person")
+    .overlay    
+      header
+        nav
+          ul
+            li
+              a(href="about.html") About Us
+            li
+              a(href="how-to-play.html") How to Play
+            li
+              a(href="coming-up.html") Coming Up
+            li
+              a(href="about.html") Mentor sign up
+      main
+        .left
+          h1 FeBe is a virtual world where women can develop a network and learn about STEM with the help of incredible mentors
+          button#join-button Join
+        .right
+          img(src="https://rawcdn.githack.com/5Bianca/Blender/c91b8989e91f1009e784fb080f5e07b15b9be112/blogo.png")
+          p Female Empowerment Benefits Everyone
+
     .renderer-container(style="display: none;")
       canvas#canvas
     .scene-container(style="display: none;")
       canvas#scene-canvas
-      
-      
-.modal-container
-  label.has-text-centered(for='button_1') open video 
-  input#button_1.modal-toggle(type='checkbox' notchecked='notchecked')
-  .modal-backdrop
-    .modal-content.blur
-      label.modal-close(for='button_1') x
-      iframe(width='700', height='550', src='https://meet.jit.si/FebeMetaverse', frameborder='0', allowfullscreen)
