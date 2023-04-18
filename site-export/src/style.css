@@ -1,77 +1,85 @@
-/* Reset default browser styles */
-* {
-  padding: 0;
-  box-sizing: border-box;
-
-}
-
-/* Set background color */
 body {
-  background-color: #A6E5FF;
+  background-image: url('https://rawcdn.githack.com/5Bianca/Blender/ad581ef4e73f01116a52b8bf79ca896cf942142d/black%20stars.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-/* Set font family and color for text */
-body, button {
-  font-family: Arial, sans-serif;
-  color: #0;
+header {
+  background-color: #333;
+  height: 50px;
 }
 
-/* Style for the welcome message */
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  font-size: 1.2em;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #666;
+}
+
+.left {
+  position: absolute;
+  top: 24%;
+  left: 8%; 
+  height: 100%;
+  width: 50%;
+  max-width: 500px;
+}
+
+.right {
+  position: absolute;
+  top: 22%;
+  left: 60%; 
+  height: 100%;
+  width: 70%; 
+}
+
 h1 {
-  font-size: 0; /* Set font-size to 0 to hide the text */
-  background: url('https://rawcdn.githack.com/5Bianca/Blender/c91b8989e91f1009e784fb080f5e07b15b9be112/blogo.png') center center/contain no-repeat; /* Set the image as background, centered and scaled to fit the container */
-  height: 200px; /* Set the height of the element to match the image height */
-  width: 100%; /* Set the width to match the container width */
-  padding: 50px;
-  margin: 0 auto; /* Center the element */
-  margin-top: 7%;
-  width: 80%; /* Set the width of the element */
+  font-size: 2em;
+  color: white;
+  margin: 0;
+  margin-bottom: 30px;
 }
-
-/* Style for the join button */
 #join-button {
-  margin-left: 55%;
-  margin-top: 30px;
-  background-color: #333333;
+  margin-left: 24%;
+  margin-top: 15%;
+  background-color: #8e7cc3;
   color: #ffffff;
-  font-size: 30px;
-  padding: 20px 30px;
+  font-size: 50px;
+  padding: 30px 50px;
   border: none;
-  border-radius: 50px;
+  border-radius: 40px;
   cursor: pointer;
 }
 
 p {
-  color: 0;
-  font-size: 20px;
-  margin-left: 55%;
-  margin-top: 5%;
+  font-size: 1.5em;
+  color: white;
+  margin: 0;
+  line-height: 1.5;
+  box-sizing: border-box;
+  left: 10%; 
+
 }
 
 img {
-  position: absolute;
-  top: 240px;
-  left: 25%; /* Set the left margin to position it about 2/5 from the left */
-  height: 50%;
-  width: 23%; 
+  width:200%;
+  max-width: 600px;
+  height: auto;
 }
-
-/* Style for the scene container */
-.scene-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: crosshair;
-
-}
-
-div.renderer-container(style="display: none;")
-  canvas#canvas
-div.scene-container(style="display: none;")
