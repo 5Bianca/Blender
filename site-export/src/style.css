@@ -86,9 +86,10 @@ nav a:hover {
 
 p {
   position: absolute; 
-  font-size: 1.8em;
+  font-size: 2.2em;
   color: white;
-  left: 8%;
+  left: 1%;
+  top: 65%
 }
 
 img {
