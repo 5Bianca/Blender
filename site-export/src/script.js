@@ -107,7 +107,7 @@ const loadBuilding = (url, position, rotation) => {
 };
 
    new GLTFLoader().load(
-  "https://rawcdn.githack.com/5Bianca/Blender/6dc517eb904a08f089b04d21bd836ff3b8456031/Tech%20building%20final%20final.glb",
+  "https://rawcdn.githack.com/5Bianca/Blender/4088b9ae534163799c3b86f6349041f4bb538085/TechFinal3.glb",
   ({ scene: model }, animations) => {
     model.scale.setScalar(1.1);
     model.position.set(60, -36, -35);
